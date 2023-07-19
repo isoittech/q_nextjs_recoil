@@ -1,9 +1,10 @@
+"use client"
+
 import Image from "next/image";
 import styles from "./page.module.css";
-import { fsApi } from "@/api/filesystem";
+import { ChildComponent } from "@/components/ChildComponent";
 
-export default async function Home() {
-  const list = await fsApi.listItems();
+export default function Home() {
 
   return (
     <main className={styles.main}>
@@ -42,11 +43,7 @@ export default async function Home() {
         />
       </div> */}
 
-      <div className={styles.grid}>
-        <ul>
-          {list && list.map((item, index) => <li key={index}>{item}</li>)}
-        </ul>
-      </div>
+      <ChildComponent />
 
       <div className={styles.grid}>
         <a
