@@ -1,7 +1,10 @@
-import Image from 'next/image'
-import styles from './page.module.css'
+import Image from "next/image";
+import styles from "./page.module.css";
+import { fsApi } from "@/api/filesystem";
 
-export default function Home() {
+export default async function Home() {
+  const list = await fsApi.listItems();
+
   return (
     <main className={styles.main}>
       <div className={styles.description}>
@@ -15,7 +18,7 @@ export default function Home() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            By{' '}
+            By{" "}
             <Image
               src="/vercel.svg"
               alt="Vercel Logo"
@@ -28,7 +31,7 @@ export default function Home() {
         </div>
       </div>
 
-      <div className={styles.center}>
+      {/* <div className={styles.center}>
         <Image
           className={styles.logo}
           src="/next.svg"
@@ -37,6 +40,12 @@ export default function Home() {
           height={37}
           priority
         />
+      </div> */}
+
+      <div className={styles.grid}>
+        <ul>
+          {list && list.map((item, index) => <li key={index}>{item}</li>)}
+        </ul>
       </div>
 
       <div className={styles.grid}>
@@ -91,5 +100,5 @@ export default function Home() {
         </a>
       </div>
     </main>
-  )
+  );
 }
